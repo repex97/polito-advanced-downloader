@@ -65,3 +65,5 @@ secret.py
 
 # pycharm
 .idea/
+
+/src/settings.json
