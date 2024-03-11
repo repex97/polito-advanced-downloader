@@ -506,7 +506,7 @@ class PolitoWeb:
         # se non c'è crea la cartella per ospitare la videolezione
         nome_cartella_corso = self.__generate_folder_name(corso_scelto, link_scelto, update)
         if not os.path.isdir(os.path.join(self.dl_folder, nome_cartella_corso)):
-            os.mkdir(os.path.join(self.dl_folder, nome_cartella_corso))
+            os.makedirs(os.path.join(self.dl_folder, nome_cartella_corso), exist_ok=True)
         # scarica le videolezioni
 
         self.__download_video(link_scelto, nome_cartella_corso)
@@ -576,7 +576,7 @@ class PolitoWeb:
     def __generate_folder_name(corso: Corso, link: Link, update):
         suffix = ("" if update else " - noupdate")
         codice = (link.codice if not link.is_elearn else "E_" + link.codice)
-        return "{} ({}) [{}]{}".format(corso.nome, link.anno.replace("/", "-"), codice, suffix)
+        return "{}/Videolezioni({}) [{}]{}".format(corso.nome, link.anno.replace("/", "-"), codice, suffix)
 
     @staticmethod
     def __decode_folder_name(folder_name: str):
